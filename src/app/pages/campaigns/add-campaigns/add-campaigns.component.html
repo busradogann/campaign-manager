@@ -1,0 +1,63 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h2>Kampanya Ekle</h2>
+    <button class="close-btn" (click)="modal.close()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <form [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Kampanya Adı</label>
+      <input type="text" 
+             id="name"
+             formControlName="name">
+      <div class="error-message" *ngIf="campaignForm.get('name')?.invalid && campaignForm.get('name')?.touched">
+        Kampanya adı boş bırakılamaz
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Kampanya Açıklaması</label>
+      <textarea id="description"
+                formControlName="description"></textarea>
+      <div class="error-message" *ngIf="campaignForm.get('description')?.invalid && campaignForm.get('description')?.touched">
+        Kampanya açıklaması boş bırakılamaz
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="points">Kampanya Puanı</label>
+      <div class="points-input-group">
+        <button type="button" 
+                class="points-btn" 
+                (click)="decreasePoints()"
+                [disabled]="campaignForm.get('points')?.value <= 0">
+          <i class="fas fa-minus"></i>
+        </button>
+        
+        <input type="number" 
+               id="points" 
+               formControlName="points" 
+               min="0"
+               (keypress)="numberOnly($event)">
+               
+        <button type="button" 
+                class="points-btn"
+                (click)="increasePoints()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <div class="error-message" *ngIf="campaignForm.get('points')?.invalid && campaignForm.get('points')?.touched">
+        Kampanya puanı 0'dan küçük olamaz
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" (click)="modal.close()">İptal</button>
+      <button type="submit" 
+              class="btn-primary" 
+              [disabled]="!campaignForm.valid">Kaydet</button>
+    </div>
+  </form>
+</div> 

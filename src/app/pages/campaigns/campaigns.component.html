@@ -1,0 +1,76 @@
+<div class="campaigns-container">
+  <div class="success-message" *ngIf="showSuccessMessage">
+    <i class="fas fa-check-circle"></i>
+    {{ successMessage }}
+  </div>
+
+  <div class="campaigns-header">
+    <h1>Kampanyalar</h1>
+    
+    <div class="sort-dropdown" #sortDropdown>
+      <button class="sort-select" (click)="toggleSortDropdown($event)">
+        {{ selectedSortLabel }}
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      
+      <div class="dropdown-menu" *ngIf="showSortDropdown">
+        <button class="dropdown-item" (click)="onSortSelect('points_desc')">
+          Puan (Yüksek → Düşük)
+        </button>
+        <button class="dropdown-item" (click)="onSortSelect('points_asc')">
+          Puan (Düşük → Yüksek)
+        </button>
+        <button class="dropdown-item" (click)="onSortSelect('date_desc')">
+          Tarih (Yeni → Eski)
+        </button>
+        <button class="dropdown-item" (click)="onSortSelect('date_asc')">
+          Tarih (Eski → Yeni)
+        </button>
+      </div>
+    </div>
+
+    <button class="add-btn" (click)="openAddCampaignModal()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  
+  <div class="campaigns-content">
+    <div class="table-responsive" *ngIf="campaigns.length > 0; else noCampaigns">
+      <table class="campaigns-table">
+        <thead>
+          <tr>
+            <th>Kampanya Adı</th>
+            <th>Açıklama</th>
+            <th>Puan</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Güncelleme Tarihi</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let campaign of campaigns; let i = index" 
+              (click)="openUpdateCampaignModal(campaign, getOriginalIndex(campaign))"
+              class="campaign-row">
+            <td data-label="Kampanya Adı">{{ campaign.name }}</td>
+            <td data-label="Açıklama">{{ campaign.description }}</td>
+            <td data-label="Puan">{{ campaign.points }}</td>
+            <td data-label="Oluşturulma Tarihi">{{ formatDate(campaign.createdAt) }}</td>
+            <td data-label="Güncelleme Tarihi">{{ formatDate(campaign.updatedAt) }}</td>
+            <td data-label="İşlemler" class="actions-cell">
+              <button class="edit-btn" (click)="$event.stopPropagation(); openUpdateCampaignModal(campaign, getOriginalIndex(campaign))">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="delete-btn" (click)="$event.stopPropagation(); deleteCampaign(getOriginalIndex(campaign))">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <ng-template #noCampaigns>
+      <p class="no-campaigns">Henüz kampanya bulunmamaktadır.</p>
+    </ng-template>
+  </div>
+</div> 

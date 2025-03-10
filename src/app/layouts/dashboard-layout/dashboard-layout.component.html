@@ -1,0 +1,60 @@
+<div class="dashboard-layout" [class.sidebar-open]="isSidebarOpen">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <button class="hamburger-btn" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo-container">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Moneytolia</span>
+      </div>
+    </div>
+    <div class="header-center">
+      <h1>Moneytolia</h1>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" (click)="toggleTheme()">
+        <i class="fas" [ngClass]="currentTheme === 'light-theme' ? 'fa-moon' : 'fa-sun'"></i>
+      </button>
+      <button class="logout-btn" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="btn-text">Çıkış</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="dashboard-content">
+    <div class="sidebar-overlay" (click)="toggleSidebar()" *ngIf="isSidebarOpen"></div>
+    
+    <aside class="dashboard-sidebar" [class.open]="isSidebarOpen">
+      <div class="sidebar-header">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a routerLink="/dashboard/campaigns" routerLinkActive="active" (click)="isSidebarOpen = false">
+              <i class="fas fa-bullhorn"></i>
+              <span>Kampanyalar</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/" (click)="isSidebarOpen = false">
+              <i class="fas fa-cog"></i>
+              <span>Ayarlar</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/" (click)="isSidebarOpen = false">
+              <i class="fas fa-chart-line"></i>
+              <span>Raporlar</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div> 

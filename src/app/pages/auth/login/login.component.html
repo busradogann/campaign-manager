@@ -1,0 +1,57 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Giriş Yap</h2>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="username"></label>
+        <div class="input-wrapper">
+          <i class="fas fa-user"></i>
+          <input 
+            type="text" 
+            id="username"
+            formControlName="username"
+            placeholder="Kullanıcı adınızı giriniz"
+            [class.is-invalid]="isFieldInvalid('username')"
+          >
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('username')">
+          Kullanıcı adı zorunludur
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password"></label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock"></i>
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="Şifrenizi giriniz"
+            [class.is-invalid]="isFieldInvalid('password')"
+          >
+          <i 
+            class="password-toggle"
+            [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+            (click)="togglePasswordVisibility()"
+          ></i>
+        </div>
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          Şifre zorunludur
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="loginForm.invalid || isLoading">
+          <i class="fas fa-spinner fa-spin" *ngIf="isLoading"></i>
+          {{ isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap' }}
+        </button>
+      </div>
+
+      <div class="error-message login-error" *ngIf="loginError">
+        {{ loginError }}
+      </div>
+    </form>
+  </div>
+</div>

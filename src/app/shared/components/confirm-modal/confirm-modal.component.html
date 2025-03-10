@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h2>{{ title }}</h2>
+    <button class="close-btn" (click)="cancel()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p>{{ message }}</p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn-secondary" (click)="cancel()">İptal</button>
+    <button type="button" class="btn-danger" (click)="confirm()">Onayla</button>
+  </div>
+</div> 

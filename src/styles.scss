@@ -1,1 +1,108 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+.light-theme {
+  --primary-color: #{getThemeColor($light-theme, primary-color)};
+  --secondary-color: #{getThemeColor($light-theme, secondary-color)};
+  --background-color: #{getThemeColor($light-theme, background-color)};
+  --card-background: #{getThemeColor($light-theme, card-background)};
+  --text-color: #{getThemeColor($light-theme, text-color)};
+  --white: #{getThemeColor($light-theme, white)};
+  --error-color: #{getThemeColor($light-theme, error-color)};
+}
+
+.dark-theme {
+  --primary-color: #{getThemeColor($dark-theme, primary-color)};
+  --secondary-color: #{getThemeColor($dark-theme, secondary-color)};
+  --background-color: #{getThemeColor($dark-theme, background-color)};
+  --card-background: #{getThemeColor($dark-theme, card-background)};
+  --text-color: #{getThemeColor($dark-theme, text-color)};
+  --white: #{getThemeColor($dark-theme, white)};
+  --error-color: #{getThemeColor($dark-theme, error-color)};
+}
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Variables */
+:root {
+  --primary-color: #2C3E50;
+  --secondary-color: #3498DB;
+  --background-color: #F8F9FA;
+  --white: #FFFFFF;
+  --error-color: #E74C3C;
+}
+
+/* Modal Styles */
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.campaign-modal {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  padding: 1.5rem;
+
+  .modal-content {
+    background: var(--card-background);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-dialog {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  opacity: 1 !important;
+}
+
+/* Dark theme modal adjustments */
+.dark-theme {
+  .campaign-modal .modal-content {
+    background: var(--card-background);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+}
